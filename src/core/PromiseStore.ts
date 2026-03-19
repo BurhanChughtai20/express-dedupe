@@ -7,7 +7,7 @@ export function createPromiseStore<K, V>(
   maxSize: number = MAX_IN_FLIGHT 
 ): PromiseStore<K, V> {
   const safeMax =
-    Number.isInteger(maxSize) && maxSize > 0 ? maxSize : MAX_IN_FLIGHT;
+  Number.isInteger(maxSize) && maxSize > 0 ? maxSize : MAX_IN_FLIGHT;
 
   const cache: LRUCache<K, Promise<V>> = createLRUCache<K, Promise<V>>(safeMax);
 
