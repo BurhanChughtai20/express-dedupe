@@ -1,26 +1,70 @@
 {
   "name": "express-dedupe",
   "version": "1.0.0",
-  "description": "In-flight request deduplication middleware for Express",
-  "author": "",
+  "description": "Express middleware to deduplicate concurrent identical HTTP requests — prevents thundering herd, merges in-flight requests, boosts Node.js API performance with TypeScript support",
+  "keywords": [
+    "express",
+    "express-middleware",
+    "middleware",
+    "dedupe",
+    "deduplication",
+    "dedup",
+    "request-coalescing",
+    "request-merging",
+    "concurrent-requests",
+    "in-flight-requests",
+    "thundering-herd",
+    "thundering-herd-protection",
+    "cache",
+    "request-cache",
+    "performance",
+    "nodejs",
+    "node",
+    "typescript",
+    "trie",
+    "url-pattern",
+    "rate-limiting",
+    "api-optimization",
+    "http-middleware",
+    "request-deduplication",
+    "prevent-duplicate-requests"
+  ],
+  "author": {
+    "name": "Muhammad Burhan Chughtai",
+    "url": "https://github.com/BurhanChughtai20"
+  },
   "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
-  ".": {
-    "types":   "./dist/index.d.ts",
-    "import":  "./dist/index.mjs",
-    "require": "./dist/index.js"
-  }
-},
+    ".": {
+      "types":   "./dist/index.d.ts",
+      "import":  "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
+  "homepage": "https://github.com/BurhanChughtai20/express-dedupe",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BurhanChughtai20/express-dedupe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BurhanChughtai20/express-dedupe/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
     "dev":   "tsup src/index.ts --format cjs,esm --dts --watch",
-    "lint":  "tsc --noEmit"
+    "lint":  "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run lint"
   },
   "peerDependencies": {
     "express": ">=4.0.0"
