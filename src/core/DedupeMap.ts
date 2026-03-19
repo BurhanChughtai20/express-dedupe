@@ -1,42 +1,32 @@
+import type { DedupeMap } from "../types/DedupeMap.interface.ts";
+import type { PromiseStore } from "../types/PromiseStore.interface.ts";
 import { createPromiseStore } from "./PromiseStore.ts";
-
-export interface DedupeMap<K, V> {
-  isInFlight   (key: K)                        : boolean;
-  addInFlight  (key: K, promise: Promise<V>)   : Promise<V>;
-  getInFlight  (key: K)                        : Promise<V> | undefined;
-  complete     (key: K)                        : void;
-  size         ()                              : number;
-  clear        ()                              : void;
-}
+import { MAX_IN_FLIGHT } from "../constants/dedupe.constants.ts"; 
 
 export function createDedupeMap<K, V>(
-  maxSize: number = 1_000
+  maxSize: number = MAX_IN_FLIGHT 
 ): DedupeMap<K, V> {
-
-  const safeMaxSize = Number.isInteger(maxSize) && maxSize > 0
-    ? maxSize
-    : 1_000;
-
-  const store = createPromiseStore<K, V>(safeMaxSize);
+  const store: PromiseStore<K, V> = createPromiseStore<K, V>(maxSize);
 
   function isInFlight(key: K): boolean {
     return store.retrieve(key) !== undefined;
   }
 
   function addInFlight(key: K, promise: Promise<V>): Promise<V> {
-
-    if (isInFlight(key)) {
-      return store.retrieve(key)!;
+    const existingPromise = store.retrieve(key);
+    if (existingPromise !== undefined) {
+      return existingPromise;
     }
 
-    if (!(promise instanceof Promise)) {
-      return Promise.resolve() as unknown as Promise<V>;
+    if (!isPromise(promise)) {
+      return Promise.reject(
+        new TypeError(
+          `[DedupeMap] addInFlight: expected a Promise for key "${String(key)}", received ${typeof promise}`
+        )
+      );
     }
 
-    promise
-      .then(() => complete(key))
-      .catch(() => complete(key));
-
+    autoCompleteOnSettlement(key, promise);
     store.store(key, promise);
     return promise;
   }
@@ -55,6 +45,17 @@ export function createDedupeMap<K, V>(
 
   function clear(): void {
     store.clear();
+  }
+
+  function isPromise(value: unknown): value is Promise<V> {
+    return value instanceof Promise;
+  }
+
+  function autoCompleteOnSettlement(key: K, promise: Promise<V>): void {
+    promise.then(
+      () => complete(key),
+      () => complete(key)
+    );
   }
 
   return { isInFlight, addInFlight, getInFlight, complete, size, clear };
