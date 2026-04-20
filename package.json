@@ -1,6 +1,6 @@
 {
   "name": "express-dedupe",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Express middleware to deduplicate concurrent identical HTTP requests — prevents thundering herd, merges in-flight requests, boosts Node.js API performance with TypeScript support",
   "keywords": [
     "express",
