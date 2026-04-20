@@ -52,7 +52,7 @@
   "homepage": "https://github.com/BurhanChughtai20/express-dedupe",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BurhanChughtai20/express-dedupe.git"
+    "url": "git+https://github.com/BurhanChughtai20/express-dedupe.git"
   },
   "bugs": {
     "url": "https://github.com/BurhanChughtai20/express-dedupe/issues"
