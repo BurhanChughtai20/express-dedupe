@@ -1,4 +1,4 @@
-import type { HTTPMethod } from "../types/DedupeOptions.interface.ts";
+import { HTTPMethod } from "../shared";
 
 export const TTL_MS          = 5_000  as const;
 export const MAX_IN_FLIGHT   = 1_000  as const;

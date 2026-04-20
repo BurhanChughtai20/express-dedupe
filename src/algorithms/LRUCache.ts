@@ -1,5 +1,4 @@
-import { LRUCache, Node } from "../types/LRUCache.interface.ts";
-import { MAX_IN_FLIGHT } from '../constants/dedupe.constants.ts';
+import { LRUCache, MAX_IN_FLIGHT, Node } from "../shared";
 
 export function createLRUCache<K, V>(maxSize: number = MAX_IN_FLIGHT ): LRUCache<K, V> {
   const safeMax =

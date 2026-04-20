@@ -1,7 +1,5 @@
-import { createLRUCache } from "../algorithms/LRUCache.ts";
-import type { LRUCache } from "../types/LRUCache.interface.ts";
-import type { PromiseStore } from "../types/PromiseStore.interface.ts";
-import { MAX_IN_FLIGHT } from "../constants/dedupe.constants.ts";
+import { createLRUCache, LRUCache, MAX_IN_FLIGHT, PromiseStore } from "../shared";
+
 
 export function createPromiseStore<K, V>(
   maxSize: number = MAX_IN_FLIGHT 

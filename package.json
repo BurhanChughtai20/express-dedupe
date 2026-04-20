@@ -61,11 +61,13 @@
     "node": ">=14.0.0"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
-    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
-    "lint": "tsc --noEmit",
-    "prepublishOnly": "npm run build && npm run lint"
-  },
+  "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+  "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+  "lint": "tsc --noEmit",
+  "snyk:test": "snyk test",
+  "snyk:protect": "@snyk/protect",
+  "prepublishOnly": "npm run build && npm run lint && npm run snyk:test"
+},
   "peerDependencies": {
     "express": ">=4.0.0"
   },
@@ -75,9 +77,10 @@
     }
   },
   "devDependencies": {
+    "@snyk/protect": "^1.1304.0",
     "@types/express": "^5.0.0",
+    "express": "^4.21.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.0.0",
-    "express": "^4.21.0"
+    "typescript": "^5.0.0"
   }
 }

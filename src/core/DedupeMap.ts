@@ -1,7 +1,5 @@
-import type { DedupeMap } from "../types/DedupeMap.interface.ts";
-import type { PromiseStore } from "../types/PromiseStore.interface.ts";
-import { createPromiseStore } from "./PromiseStore.ts";
-import { MAX_IN_FLIGHT } from "../constants/dedupe.constants.ts"; 
+import { createPromiseStore, DedupeMap, MAX_IN_FLIGHT, PromiseStore } from "../shared";
+
 
 export function createDedupeMap<K, V>(
   maxSize: number = MAX_IN_FLIGHT 

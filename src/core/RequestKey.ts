@@ -1,6 +1,6 @@
 import type { Request } from "express"; 
-import { UrlPatternTrie } from "../algorithms/Trie.ts";
-import { KEY_SEPARATOR } from "../constants/dedupe.constants.ts";
+import { KEY_SEPARATOR, UrlPatternTrie } from "../shared";
+
 
 const DUMMY_BASE = "http://localhost";
 const QUERY_SEPARATOR = "?";
