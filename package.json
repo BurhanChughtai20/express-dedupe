@@ -1,6 +1,6 @@
 {
   "name": "express-dedupe",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Express middleware to deduplicate concurrent identical HTTP requests — prevents thundering herd, merges in-flight requests, boosts Node.js API performance with TypeScript support",
   "keywords": [
     "express",
@@ -61,13 +61,13 @@
     "node": ">=14.0.0"
   },
   "scripts": {
-  "build": "tsup src/index.ts --format cjs,esm --dts --clean",
-  "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
-  "lint": "tsc --noEmit",
-  "snyk:test": "snyk test",
-  "snyk:protect": "@snyk/protect",
-  "prepublishOnly": "npm run build && npm run lint && npm run snyk:test"
-},
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "lint": "tsc --noEmit",
+    "snyk:test": "snyk test",
+    "snyk:protect": "@snyk/protect",
+    "prepublishOnly": "npm run build && npm run lint && npm run snyk:test"
+  },
   "peerDependencies": {
     "express": ">=4.0.0"
   },
